@@ -1,0 +1,108 @@
+#include "Strings.h"
+
+#include <array>
+#include <cstddef>
+#include <utility>
+
+namespace {
+
+using Pair = std::pair<std::string_view, std::string_view>;
+
+constexpr std::array<Pair, static_cast<std::size_t>(Str::Count)> Table{{
+    {"3D Checkers", "Шашки 3D"},
+    {"White to move", "Ход белых"},
+    {"Black to move", "Ход чёрных"},
+    {"Must take", "Нужно бить"},
+    {"Computer is thinking…", "Компьютер думает…"},
+    {"Draw", "Ничья"},
+    {"White wins", "Белые победили"},
+    {"Black wins", "Чёрные победили"},
+    {"no pieces left", "шашек не осталось"},
+    {"no moves left", "ходов не осталось"},
+    {"ran out of moves first", "первыми остались без ходов"},
+    {"by threefold repetition", "троекратное повторение"},
+    {"kings only, nothing taken", "ходы дамками без взятий"},
+    {"a king against a king", "дамка против дамки"},
+    {"You", "Вы"},
+    {"Computer", "Компьютер"},
+    {"Player", "Игрок"},
+    {"White", "Белые"},
+    {"Black", "Чёрные"},
+    {"Moves", "Ходы"},
+    {"No moves yet", "Ходов пока нет"},
+    {"Undo", "Назад"},
+    {"Redo", "Вперёд"},
+    {"Hint", "Подсказка"},
+    {"New game", "Новая партия"},
+    {"Flip board", "Развернуть"},
+    {"Mode", "Режим"},
+    {"You play White", "Вы за белых"},
+    {"You play Black", "Вы за чёрных"},
+    {"Two players", "Два игрока"},
+    {"Computer vs computer", "Компьютер сам с собой"},
+    {"Level", "Уровень"},
+    {"Beginner", "Новичок"},
+    {"Casual", "Любитель"},
+    {"Club player", "Разрядник"},
+    {"Expert", "Сильный"},
+    {"Master", "Мастер"},
+    {"Rules", "Правила"},
+    {"Russian", "Русские"},
+    {"English", "Английские"},
+    {"Giveaway", "Поддавки"},
+    {"Theme", "Тема"},
+    {"Sound", "Звук"},
+    {"On", "Вкл"},
+    {"Off", "Выкл"},
+    {"English", "Русский"},
+    {"F1 help · Tab panel · F11 full screen", "F1 справка · Tab панель · F11 весь экран"},
+    {"Controls", "Управление"},
+    {"Click", "Щелчок"},
+    {"Drag", "Перетаскивание"},
+    {"Right drag", "Правая кнопка"},
+    {"Wheel", "Колесо мыши"},
+    {"Click a piece, then where it goes", "Щелчок по шашке, затем по полю"},
+    {"Or drag the piece", "Или перетащите шашку"},
+    {"Turn the view (or drag beside the pieces)", "Повернуть вид (или тянуть мимо шашек)"},
+    {"Zoom in and out", "Приблизить или отдалить"},
+    {"Take back", "Отменить ход"},
+    {"Replay", "Вернуть ход"},
+    {"Suggest a move", "Подсказать ход"},
+    {"New game", "Новая партия"},
+    {"Flip the board", "Развернуть доску"},
+    {"View from above", "Вид сверху"},
+    {"Computer level", "Уровень компьютера"},
+    {"Who plays whom", "Кто с кем играет"},
+    {"Russian, English, giveaway", "Русские, английские, поддавки"},
+    {"Next theme", "Следующая тема"},
+    {"Sound on or off", "Звук вкл/выкл"},
+    {"English / Russian", "Русский / английский"},
+    {"Show or hide the panel", "Показать/скрыть панель"},
+    {"Full screen", "Весь экран"},
+    {"Copy the game (PDN), Shift: the position", "Копировать партию (PDN), Shift: позицию"},
+    {"Paste a PDN game or position", "Вставить партию или позицию PDN"},
+    {"Close this help", "Закрыть справку"},
+    {"Men move forward and take both ways. Taking is compulsory. Kings fly any distance. White begins.",
+     "Простые ходят вперёд, бьют вперёд и назад. Бить обязательно. Дамка ходит на любое поле. Начинают белые."},
+    {"Men move and take forward only. Taking is compulsory. Kings move one square. Black begins.",
+     "Простые ходят и бьют только вперёд. Бить обязательно. Дамка ходит на одно поле. Начинают чёрные."},
+    {"Russian rules, but the aim is to lose all your pieces or be left without a move.",
+     "Русские правила, но цель — отдать все шашки или остаться без ходов."},
+    {"Game copied as PDN", "Партия скопирована (PDN)"},
+    {"Position copied", "Позиция скопирована"},
+    {"Game loaded", "Партия загружена"},
+    {"The clipboard has no game or position", "В буфере нет партии или позиции"},
+    {"Hint: ", "Подсказка: "},
+    {"No moves to take back", "Нечего отменять"},
+    {"Taking is compulsory", "Бить обязательно"},
+    {"Several captures end here: click the squares on the way", "Сюда ведут разные взятия: укажите поля по пути"},
+    {"New game: ", "Новая партия: "},
+}};
+
+} // namespace
+
+std::string_view Tr(Str id, Language language)
+{
+    const Pair& pair = Table[std::to_underlying(id)];
+    return language == Language::Russian ? pair.second : pair.first;
+}
